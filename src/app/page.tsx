@@ -1,15 +1,20 @@
+import LoadMore from "@/components/layout/LoadMore";
+import PostCard from "@/components/layout/PostCard";
+import { getPosts } from "@/lib/actions";
+import { Post } from "@/types/types";
 import React from "react";
 
-const Home = () => {
+const Home = async () => {
+  const page = 3;
+  const posts: Post[] = await getPosts(page);
   return (
-    <div className="border">
-      <h1 className="text-primary text-2xl font-bold">Welcome</h1>
-      <p className="text-secondary">
-        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Repudiandae
-        nisi eum fugiat ex commodi amet, explicabo doloremque laborum
-        reiciendis, aspernatur reprehenderit? Beatae nostrum iste consequatur
-        voluptate ipsam aliquid doloremque quibusdam?
-      </p>
+    <div>
+      <div className="flex flex-col gap-5 my-10">
+        {posts.map((post: Post) => (
+          <PostCard key={post.id} {...post} />
+        ))}
+      </div>
+      <LoadMore />
     </div>
   );
 };

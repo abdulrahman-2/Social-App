@@ -12,11 +12,15 @@ const config: Config = {
     extend: {
       colors: {
         background: "var(--background)",
+        border: "var(--border)",
         primary: "var(--primary)",
         secondary: "var(--secondary)",
         btn: "var(--btn)",
         btnHover: "var(--btnHover)",
         shadow: "var(--shadow)",
+      },
+      screens: {
+        lg: "892px",
       },
       container: {
         center: true,
