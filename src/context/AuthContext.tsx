@@ -21,42 +21,42 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   useEffect(() => {
-    const storedToken = localStorage.getItem("token");
-    if (storedToken) {
-      setToken(storedToken);
-      setIsAuthenticated(true);
-    } else {
-      setIsAuthenticated(false);
+    if (typeof window !== "undefined") {
+      const storedToken = localStorage.getItem("token");
+      if (storedToken) {
+        setToken(storedToken);
+        setIsAuthenticated(true);
+      } else {
+        setIsAuthenticated(false);
+      }
+
+      const storedUser = localStorage.getItem("user");
+      if (storedUser) {
+        setUser(JSON.parse(storedUser));
+      }
     }
   }, []);
 
   useEffect(() => {
-    const storedUser = localStorage.getItem("user");
-    if (storedUser) {
-      setUser(JSON.parse(storedUser));
-    }
-  }, []);
-
-  useEffect(() => {
-    if (token) {
-      setIsAuthenticated(true);
-    } else {
-      setIsAuthenticated(false);
-    }
+    setIsAuthenticated(!!token);
   }, [token]);
 
   const saveTokenAndUser = (user: User, userToken: string) => {
     setToken(userToken);
     setUser(user);
-    localStorage.setItem("token", userToken);
-    localStorage.setItem("user", JSON.stringify(user));
+    if (typeof window !== "undefined") {
+      localStorage.setItem("token", userToken);
+      localStorage.setItem("user", JSON.stringify(user));
+    }
   };
 
   const deleteTokenAndUser = () => {
     setToken("");
     setUser(null);
-    localStorage.removeItem("token");
-    localStorage.removeItem("user");
+    if (typeof window !== "undefined") {
+      localStorage.removeItem("token");
+      localStorage.removeItem("user");
+    }
   };
 
   return (

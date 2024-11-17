@@ -4,12 +4,12 @@ import React, { useContext } from "react";
 import ThemeSwitch from "../common/ThemeSwitch";
 import Link from "next/link";
 import { Dropdown } from "flowbite-react";
-import SignIn from "@/app/(auth)/signIn/page";
-import SignUp from "@/app/(auth)/signUp/page";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { noAvatar } from "@/assets";
 import AuthContext from "@/context/AuthContext";
+import SignIn from "./auth/SignIn";
+import SignUp from "./auth/SignUp";
 
 const isValidImageUrl = (url: string | undefined): boolean => {
   if (!url) return false;
