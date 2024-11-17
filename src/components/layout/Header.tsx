@@ -21,7 +21,10 @@ const Header = () => {
   const router = useRouter();
 
   const handleLogout = async () => {
-    deleteTokenAndUser();
+    if (typeof window !== "undefined" && window.localStorage) {
+      deleteTokenAndUser();
+    }
+
     router.refresh();
   };
 
@@ -50,6 +53,7 @@ const Header = () => {
                       }
                       width={33}
                       height={33}
+                      priority
                       className="w-[33px] h-[33px] rounded-full"
                     />
                   }

@@ -21,9 +21,9 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   useEffect(() => {
-    if (typeof window !== "undefined") {
-      const storedToken = localStorage.getItem("token");
-      const storedUser = localStorage.getItem("user");
+    if (typeof window !== "undefined" && window.localStorage) {
+      const storedToken = window.localStorage.getItem("token");
+      const storedUser = window.localStorage.getItem("user");
 
       if (storedToken) {
         setToken(storedToken);
@@ -45,9 +45,9 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const saveTokenAndUser = (user: User, userToken: string) => {
     setToken(userToken);
     setUser(user);
-    if (typeof window !== "undefined") {
-      localStorage.setItem("token", userToken);
-      localStorage.setItem("user", JSON.stringify(user));
+    if (typeof window !== "undefined" && window.localStorage) {
+      window.localStorage.setItem("token", userToken);
+      window.localStorage.setItem("user", JSON.stringify(user));
     }
   };
 
@@ -55,8 +55,8 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     setToken("");
     setUser(null);
     if (typeof window !== "undefined") {
-      localStorage.removeItem("token");
-      localStorage.removeItem("user");
+      window.localStorage.removeItem("token");
+      window.localStorage.removeItem("user");
     }
   };
 

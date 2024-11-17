@@ -1,8 +1,9 @@
 "use client";
 
+import AuthContext from "@/context/AuthContext";
 import { editPost, getSinglePost } from "@/lib/actions";
 import { Button, FileInput, Label, Modal, TextInput } from "flowbite-react";
-import { useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import toast from "react-hot-toast";
 
 export function EditPostModal({
@@ -19,7 +20,7 @@ export function EditPostModal({
   const [title, setTitle] = useState<string>("");
   const emailInputRef = useRef<HTMLInputElement>(null);
 
-  const token = localStorage.getItem("token") as string;
+  const { token } = useContext(AuthContext);
 
   const onCloseModal = () => {
     setOpenModal(false);
