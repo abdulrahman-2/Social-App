@@ -1,7 +1,6 @@
 "use client";
 
 import { editPost, getSinglePost } from "@/lib/actions";
-import { Post } from "@/types/types";
 import { Button, FileInput, Label, Modal, TextInput } from "flowbite-react";
 import { useEffect, useRef, useState } from "react";
 import toast from "react-hot-toast";
