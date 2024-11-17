@@ -16,7 +16,6 @@ export function EditPostModal({
   setOpenModal: React.Dispatch<React.SetStateAction<boolean>>;
 }) {
   const [loading, setLoading] = useState(false);
-  const [post, setPost] = useState<Post | null>(null);
   const [image, setImage] = useState<File | null>(null);
   const [title, setTitle] = useState<string>("");
   const emailInputRef = useRef<HTMLInputElement>(null);
@@ -31,7 +30,6 @@ export function EditPostModal({
     const fetchPost = async () => {
       try {
         const data = await getSinglePost(id);
-        setPost(data);
         setTitle(data.body || "");
       } catch (error) {
         console.error(error);
