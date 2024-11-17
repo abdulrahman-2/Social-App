@@ -25,12 +25,12 @@ const LoadMore = () => {
   }, [inView, posts]);
   return (
     <div>
-      <div className="flex flex-col gap-5 my-10">
+      <div className="flex flex-col gap-5 my-5">
         {posts.map((post: Post) => (
           <PostCard key={post.id} {...post} />
         ))}
       </div>
-      <div ref={ref} className="flex items-center justify-center mb-10">
+      <div ref={ref} className="flex items-center justify-center mb-5">
         <Spinner aria-label="Extra large spinner example" size="xl" />
       </div>
     </div>

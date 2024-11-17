@@ -1,3 +1,4 @@
-import image from "../assets/Screenshot 2024-11-12 204834.png";
+import notFound from "./notFound.jpg";
+import noAvatar from "./noAvatar.jpg";
 
-export { image };
+export { notFound, noAvatar };

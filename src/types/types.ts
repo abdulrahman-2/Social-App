@@ -23,3 +23,18 @@ export type Post = {
   comments_count: number;
   author: Author;
 };
+
+export type User = {
+  id: number;
+  username: string;
+  email: string;
+  name: string;
+  comments_count: number;
+  posts_count: number;
+  profile_image: string;
+};
+
+export type UserData = {
+  token: string;
+  user: User;
+};
