@@ -23,6 +23,8 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   useEffect(() => {
     if (typeof window !== "undefined") {
       const storedToken = localStorage.getItem("token");
+      const storedUser = localStorage.getItem("user");
+
       if (storedToken) {
         setToken(storedToken);
         setIsAuthenticated(true);
@@ -30,7 +32,6 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         setIsAuthenticated(false);
       }
 
-      const storedUser = localStorage.getItem("user");
       if (storedUser) {
         setUser(JSON.parse(storedUser));
       }
