@@ -1,15 +1,16 @@
 "use client";
 
-import React, { useContext } from "react";
 import ThemeSwitch from "../common/ThemeSwitch";
 import Link from "next/link";
 import { Dropdown } from "flowbite-react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { noAvatar } from "@/assets";
-import AuthContext from "@/context/AuthContext";
 import SignIn from "./auth/SignIn";
 import SignUp from "./auth/SignUp";
+import { useDispatch, useSelector } from "react-redux";
+import { deleteTokenAndUser } from "@/redux/slices/authSlice";
+import { User } from "@/types/types";
 
 const isValidImageUrl = (url: string | undefined): boolean => {
   if (!url) return false;
@@ -17,14 +18,15 @@ const isValidImageUrl = (url: string | undefined): boolean => {
 };
 
 const Header = () => {
-  const { user, deleteTokenAndUser, token } = useContext(AuthContext);
+  const { isAuthenticated, user } = useSelector(
+    (state: { auth: { isAuthenticated: boolean; user: User } }) => state.auth
+  );
+  const dispatch = useDispatch();
+
   const router = useRouter();
 
   const handleLogout = async () => {
-    if (typeof window !== "undefined" && window.localStorage) {
-      deleteTokenAndUser();
-    }
-
+    dispatch(deleteTokenAndUser());
     router.refresh();
   };
 
@@ -39,7 +41,7 @@ const Header = () => {
 
         {/* User Session */}
         <div className="flex items-center gap-3 md:gap-4">
-          {token ? (
+          {isAuthenticated ? (
             <>
               <div className="w-[33px] h-[33px] rounded-full overflow-hidden border-[3px] border-border grid place-content-center">
                 <Dropdown

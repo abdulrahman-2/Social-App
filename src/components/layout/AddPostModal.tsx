@@ -1,10 +1,10 @@
 "use client";
 
-import AuthContext from "@/context/AuthContext";
 import { createPost } from "@/lib/actions";
 import { Button, FileInput, Label, Modal, TextInput } from "flowbite-react";
-import { useContext, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import toast from "react-hot-toast";
+import { useSelector } from "react-redux";
 
 export function AddPostModal() {
   const [openModal, setOpenModal] = useState(false);
@@ -15,7 +15,9 @@ export function AddPostModal() {
     setOpenModal(false);
   };
 
-  const { token } = useContext(AuthContext);
+  const { token } = useSelector(
+    (state: { auth: { token: string } }) => state.auth
+  );
 
   const handleCreate = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();

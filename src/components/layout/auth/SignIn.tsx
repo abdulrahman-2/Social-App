@@ -1,7 +1,7 @@
 "use client";
 
-import AuthContext from "@/context/AuthContext";
 import { login } from "@/lib/actions";
+import { saveTokenAndUser } from "@/redux/slices/authSlice";
 import {
   Button,
   Checkbox,
@@ -10,14 +10,17 @@ import {
   Spinner,
   TextInput,
 } from "flowbite-react";
-import { useContext, useState } from "react";
+import { useState } from "react";
 import toast from "react-hot-toast";
+import { useDispatch } from "react-redux";
 
 const SignIn = () => {
   const [openModal, setOpenModal] = useState(false);
   const [loading, setLoading] = useState(false);
 
-  const { saveTokenAndUser } = useContext(AuthContext);
+  const dispatch = useDispatch();
+
+  // const { saveTokenAndUser } = useContext(AuthContext);
 
   function onCloseModal() {
     setOpenModal(false);
@@ -31,12 +34,12 @@ const SignIn = () => {
 
     try {
       const data = await login(formData);
-      const token = data.token;
-      const user = data.user;
-      if (typeof window !== "undefined" && window.localStorage) {
-        saveTokenAndUser(user, token);
-      }
-
+      dispatch(
+        saveTokenAndUser({
+          token: data.token,
+          user: data.user,
+        })
+      );
       toast.success("Login successful!");
       setLoading(false);
       onCloseModal();

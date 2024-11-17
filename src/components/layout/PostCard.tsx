@@ -1,15 +1,15 @@
 "use client";
 
 import { noAvatar, notFound } from "@/assets";
-import AuthContext from "@/context/AuthContext";
-import { Post } from "@/types/types";
+import { Post, User } from "@/types/types";
 import { Dropdown } from "flowbite-react";
 import Image from "next/image";
-import { useContext, useState } from "react";
+import { useState } from "react";
 import { BsThreeDots } from "react-icons/bs";
 import { MdModeEdit } from "react-icons/md";
 import { EditPostModal } from "./EditPostModal";
 import { DeleteModal } from "./DeleteModal";
+import { useSelector } from "react-redux";
 
 const isValidImageUrl = (url: string | undefined): boolean => {
   if (!url) return false;
@@ -29,7 +29,7 @@ const PostCard = ({
   const [openEditModal, setOpenEditModal] = useState(false);
   const [openDeleteModal, setOpenDeleteModal] = useState(false);
 
-  const { user } = useContext(AuthContext);
+  const { user } = useSelector((state: { auth: { user: User } }) => state.auth);
 
   const handleEdit = () => {
     setOpenEditModal(true);

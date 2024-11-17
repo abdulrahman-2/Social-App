@@ -4,6 +4,7 @@ import { deletePost } from "@/lib/actions";
 import { Button, Modal } from "flowbite-react";
 import toast from "react-hot-toast";
 import { HiOutlineExclamationCircle } from "react-icons/hi";
+import { useSelector } from "react-redux";
 
 export function DeleteModal({
   id,
@@ -14,7 +15,9 @@ export function DeleteModal({
   openModal: boolean;
   setOpenModal: React.Dispatch<React.SetStateAction<boolean>>;
 }) {
-  const token = localStorage.getItem("token") as string;
+  const { token } = useSelector(
+    (state: { auth: { token: string } }) => state.auth
+  );
 
   const handleDelete = async (id: number) => {
     try {
