@@ -2,20 +2,22 @@ import { User } from "@/types/types";
 import React, { createContext, useEffect, useState } from "react";
 
 export const AuthContext = createContext<{
-  token: string | null;
+  token: string;
   user: User | null;
   saveTokenAndUser: (user: User, token: string) => void;
+  deleteTokenAndUser: () => void;
   isAuthenticated: boolean;
 }>({
-  token: null,
+  token: "",
   user: null,
   saveTokenAndUser: () => {},
+  deleteTokenAndUser: () => {},
   isAuthenticated: false,
 });
 
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const [user, setUser] = useState<User | null>(null);
-  const [token, setToken] = useState<string | null>("");
+  const [token, setToken] = useState<string>("");
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   useEffect(() => {
@@ -50,12 +52,20 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     localStorage.setItem("user", JSON.stringify(user));
   };
 
+  const deleteTokenAndUser = () => {
+    setToken("");
+    setUser(null);
+    localStorage.removeItem("token");
+    localStorage.removeItem("user");
+  };
+
   return (
     <AuthContext.Provider
       value={{
         token,
         user,
         saveTokenAndUser,
+        deleteTokenAndUser,
         isAuthenticated,
       }}
     >

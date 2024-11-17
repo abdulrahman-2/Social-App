@@ -11,13 +11,17 @@ import Image from "next/image";
 import { noAvatar } from "@/assets";
 import AuthContext from "@/context/AuthContext";
 
+const isValidImageUrl = (url: string | undefined): boolean => {
+  if (!url) return false;
+  return /\.(jpg|jpeg|png|webp|gif|svg)$/i.test(url);
+};
+
 const Header = () => {
-  const { user } = useContext(AuthContext);
+  const { user, deleteTokenAndUser, token } = useContext(AuthContext);
   const router = useRouter();
-  const token = localStorage.getItem("token");
 
   const handleLogout = async () => {
-    if (token) localStorage.removeItem("token");
+    deleteTokenAndUser();
     router.refresh();
   };
 
@@ -31,18 +35,22 @@ const Header = () => {
         </div>
 
         {/* User Session */}
-        <div className="flex items-center gap-3 md:gap-5">
+        <div className="flex items-center gap-3 md:gap-4">
           {token ? (
             <>
-              <div className="w-[32px] h-[32px] rounded-full overflow-hidden border-[3px] border-border grid place-content-center">
+              <div className="w-[33px] h-[33px] rounded-full overflow-hidden border-[3px] border-border grid place-content-center">
                 <Dropdown
                   label={
                     <Image
                       alt="User settings"
-                      src={user?.profile_image || noAvatar}
-                      width={32}
-                      height={32}
-                      className="w-[32px] h-[32px] rounded-full"
+                      src={
+                        isValidImageUrl(user?.profile_image)
+                          ? (user?.profile_image as string)
+                          : noAvatar
+                      }
+                      width={33}
+                      height={33}
+                      className="w-[33px] h-[33px] rounded-full"
                     />
                   }
                   arrowIcon={false}
@@ -50,10 +58,10 @@ const Header = () => {
                 >
                   <Dropdown.Header>
                     <span className="block text-sm">
-                      {user ? user.name : ""}
+                      {user?.name || "Guest"}
                     </span>
                     <span className="block truncate text-sm font-medium">
-                      {user ? user.email : ""}
+                      {user?.email || "No email available"}
                     </span>
                   </Dropdown.Header>
                   <Dropdown.Item>Profile</Dropdown.Item>

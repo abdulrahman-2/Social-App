@@ -1,6 +1,6 @@
 "use client";
 
-import { notFound } from "@/assets";
+import { noAvatar, notFound } from "@/assets";
 import AuthContext from "@/context/AuthContext";
 import { Post } from "@/types/types";
 import { Dropdown } from "flowbite-react";
@@ -10,6 +10,11 @@ import { BsThreeDots } from "react-icons/bs";
 import { MdModeEdit } from "react-icons/md";
 import { EditPostModal } from "./EditPostModal";
 import { DeleteModal } from "./DeleteModal";
+
+const isValidImageUrl = (url: string | undefined): boolean => {
+  if (!url) return false;
+  return /\.(jpg|jpeg|png|webp|gif|svg)$/i.test(url);
+};
 
 const PostCard = ({
   id,
@@ -53,7 +58,11 @@ const PostCard = ({
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-3">
             <Image
-              src={image || notFound}
+              src={
+                (isValidImageUrl(author?.profile_image) &&
+                  author?.profile_image) ||
+                noAvatar
+              }
               alt={author.name || "Author"}
               width={32}
               height={32}
@@ -83,7 +92,7 @@ const PostCard = ({
         <hr className="text-secondary my-3" />
         <div className="relative w-full h-[350px] md:h-[450px]">
           <Image
-            src={image || notFound}
+            src={(isValidImageUrl(image) && image) || notFound}
             alt="post image"
             width={400}
             height={400}

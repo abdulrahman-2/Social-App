@@ -1,8 +1,9 @@
 "use client";
 
+import AuthContext from "@/context/AuthContext";
 import { createPost } from "@/lib/actions";
 import { Button, FileInput, Label, Modal, TextInput } from "flowbite-react";
-import { useRef, useState } from "react";
+import { useContext, useRef, useState } from "react";
 import toast from "react-hot-toast";
 
 export function AddPostModal() {
@@ -14,7 +15,7 @@ export function AddPostModal() {
     setOpenModal(false);
   };
 
-  const token = localStorage.getItem("token") as string;
+  const { token } = useContext(AuthContext);
 
   const handleCreate = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -57,9 +58,20 @@ export function AddPostModal() {
                 </div>
                 <TextInput
                   id="title"
-                  name="body"
+                  name="title"
                   ref={emailInputRef}
                   placeholder="Title"
+                />
+              </div>
+              <div>
+                <div className="mb-2 block">
+                  <Label htmlFor="body" value="Body" />
+                </div>
+                <TextInput
+                  id="body"
+                  name="body"
+                  ref={emailInputRef}
+                  placeholder="Body"
                   required
                 />
               </div>
