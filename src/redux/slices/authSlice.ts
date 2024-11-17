@@ -1,8 +1,23 @@
+import { User } from "@/types/types";
 import { createSlice } from "@reduxjs/toolkit";
 
-const initialState = {
-  user: null,
-  token: null,
+interface AuthState {
+  user: User;
+  token: string;
+  isAuthenticated: boolean;
+}
+
+const initialState: AuthState = {
+  user: {
+    id: 0,
+    username: "",
+    email: "",
+    name: "",
+    comments_count: 0,
+    posts_count: 0,
+    profile_image: "",
+  },
+  token: "",
   isAuthenticated: false,
 };
 
@@ -16,8 +31,8 @@ export const authSlice = createSlice({
       state.isAuthenticated = true;
     },
     deleteTokenAndUser: (state) => {
-      state.token = null;
-      state.user = null;
+      state.token = "";
+      state.user = initialState.user;
       state.isAuthenticated = false;
     },
   },

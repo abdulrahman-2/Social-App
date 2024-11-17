@@ -1,7 +1,13 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
-    domains: ["tarmeezacademy.com"],
+    remotePatterns: [
+      {
+        protocol: "http",
+        hostname: "tarmeezacademy.com",
+        pathname: "/**",
+      },
+    ],
   },
 };
 

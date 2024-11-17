@@ -9,8 +9,8 @@ import {
   PURGE,
   REGISTER,
 } from "redux-persist";
-import createWebStorage from "redux-persist/lib/storage/createWebStorage";
 import authReducer from "./slices/authSlice";
+import createWebStorage from "redux-persist/es/storage/createWebStorage";
 
 // Handle SSR: create no-op storage for server
 function createPersistStore() {

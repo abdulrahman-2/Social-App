@@ -6,11 +6,9 @@ import { ThemeProvider } from "next-themes";
 import { persistor, store } from "@/redux/store";
 
 export function Providers({ children }: { children: React.ReactNode }) {
-  if (typeof window === "undefined") return <>{children}</>;
-
   return (
     <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-      <Provider store={store}>
+      <Provider store={store || {}}>
         <PersistGate loading={null} persistor={persistor}>
           {children}
         </PersistGate>

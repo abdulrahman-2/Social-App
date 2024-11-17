@@ -20,8 +20,6 @@ const SignIn = () => {
 
   const dispatch = useDispatch();
 
-  // const { saveTokenAndUser } = useContext(AuthContext);
-
   function onCloseModal() {
     setOpenModal(false);
   }
