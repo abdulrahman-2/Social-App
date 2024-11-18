@@ -19,7 +19,7 @@ export const getPosts = async (page: number): Promise<Post[]> => {
     } else {
       console.error("Unknown error:", error);
     }
-    throw new Error("Failed to fetch posts. Please try again later.");
+    throw new Error("Failed to fetch posts. Please try again.");
   }
 };
 
@@ -43,9 +43,8 @@ export const getSinglePost = async (id: number): Promise<Post> => {
 
 // User Login
 export const login = async (formData: FormData): Promise<UserData> => {
-  const { username, password } = Object.fromEntries(formData);
   try {
-    const response = await api.post("/login", { username, password });
+    const response = await api.post("/login", formData);
     revalidatePath("/");
     return response.data;
   } catch (error: unknown) {
@@ -109,8 +108,9 @@ export const editPost = async (
   formData: FormData,
   token: string
 ): Promise<void> => {
+  formData.append("_method", "PUT");
   try {
-    await api.put(`/posts/${postId}`, formData, {
+    await api.post(`/posts/${postId}`, formData, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -148,5 +148,30 @@ export const deletePost = async (postId: number, token: string) => {
       console.error("Unknown error:", error);
     }
     throw new Error("Failed to delete post. Please try again.");
+  }
+};
+
+// create comment
+export const createComment = async (
+  postId: number,
+  formData: FormData,
+  token: string
+): Promise<void> => {
+  try {
+    await api.post(`/posts/${postId}/comments`, formData, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    revalidatePath(`/posts/${postId}`);
+  } catch (error: unknown) {
+    if (error instanceof AxiosError) {
+      console.error(
+        "Error during comment creation:",
+        error.response?.data || error.message
+      );
+    } else {
+      console.error("Unknown error:", error);
+    }
   }
 };

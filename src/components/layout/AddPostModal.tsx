@@ -10,6 +10,7 @@ export function AddPostModal() {
   const [openModal, setOpenModal] = useState(false);
   const [loading, setLoading] = useState(false);
   const emailInputRef = useRef<HTMLInputElement>(null);
+  const imageRef = useRef<HTMLInputElement>(null);
 
   const onCloseModal = () => {
     setOpenModal(false);
@@ -19,11 +20,18 @@ export function AddPostModal() {
     (state: { auth: { token: string } }) => state.auth
   );
 
+  if (!token) {
+    return null;
+  }
+
   const handleCreate = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setLoading(true);
 
     const formData = new FormData(e.currentTarget);
+    if (imageRef.current?.files?.[0]) {
+      formData.append("image", imageRef.current.files[0]);
+    }
 
     try {
       await createPost(formData, token);
@@ -81,7 +89,7 @@ export function AddPostModal() {
                 <div className="mb-2 block">
                   <Label htmlFor="file-upload" value="Upload Post Image" />
                 </div>
-                <FileInput id="file-upload" name="image" />
+                <FileInput id="file-upload" ref={imageRef} />
               </div>
               <div className="mt-2 block">
                 <Button type="submit" disabled={loading}>

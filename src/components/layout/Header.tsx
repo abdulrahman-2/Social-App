@@ -11,11 +11,8 @@ import SignUp from "./auth/SignUp";
 import { useDispatch, useSelector } from "react-redux";
 import { deleteTokenAndUser } from "@/redux/slices/authSlice";
 import { User } from "@/types/types";
-
-const isValidImageUrl = (url: string | undefined): boolean => {
-  if (!url) return false;
-  return /\.(jpg|jpeg|png|webp|gif|svg)$/i.test(url);
-};
+import { isValidImageUrl } from "@/lib/utils";
+import toast from "react-hot-toast";
 
 const Header = () => {
   const { isAuthenticated, user } = useSelector(
@@ -27,6 +24,7 @@ const Header = () => {
 
   const handleLogout = async () => {
     dispatch(deleteTokenAndUser());
+    toast.success("Logout successful!");
     router.refresh();
   };
 
@@ -40,10 +38,10 @@ const Header = () => {
         </div>
 
         {/* User Session */}
-        <div className="flex items-center gap-3 md:gap-4">
+        <div className="flex items-center gap-2 md:gap-3">
           {isAuthenticated ? (
             <>
-              <div className="w-[33px] h-[33px] rounded-full overflow-hidden border-[3px] border-border grid place-content-center">
+              <div className="w-[35px] h-[35px] rounded-full overflow-hidden border-[3px] border-border grid place-content-center">
                 <Dropdown
                   label={
                     <Image
@@ -53,10 +51,10 @@ const Header = () => {
                           ? (user?.profile_image as string)
                           : noAvatar
                       }
-                      width={33}
-                      height={33}
+                      width={35}
+                      height={35}
                       priority
-                      className="w-[33px] h-[33px] rounded-full"
+                      className="w-[35px] h-[35px] rounded-full"
                     />
                   }
                   arrowIcon={false}

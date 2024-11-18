@@ -12,11 +12,13 @@ const config: Config = {
     extend: {
       colors: {
         background: "var(--background)",
+        card: "var(--card)",
         border: "var(--border)",
         primary: "var(--primary)",
         secondary: "var(--secondary)",
         btn: "var(--btn)",
         btnHover: "var(--btnHover)",
+        switchHover: "var(--switchHover)",
         shadow: "var(--shadow)",
       },
       screens: {

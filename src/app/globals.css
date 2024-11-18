@@ -8,25 +8,28 @@
   padding: 0;
 }
 
+/* Light Theme */
 .light {
-  --background: rgba(245, 245, 245);
-  --primary: #000;
-  --secondary: #8f8e8e;
-  --btn: #f5f5f5;
-  --border: rgba(212, 212, 212);
-  --card: rgba(255, 255, 255);
-  --btnHover: #000;
+  --background: #f0f0f0;
+  --primary: #333;
+  --secondary: #666;
+  --btn: #ffffff;
+  --border: #e0e0e0;
+  --card: #ffffff;
+  --btnHover: #007bff;
+  --switchHover: #ebedf0;
   --shadow: rgba(0, 0, 0, 0.1);
 }
 
+/* Dark Theme */
 .dark {
-  /* --background: rgba(0, 0, 0); */
-  --background: #050a1e;
-  --primary: #fff;
-  --secondary: #ccc;
-  --btn: #333;
-  --border: rgb(52, 52, 52);
-  --card: rgba(23, 23, 23);
-  --btnHover: #fff;
+  --background: #121212;
+  --primary: #e0e0e0;
+  --secondary: #b0b0b0;
+  --btn: #333333;
+  --border: #444444;
+  --card: #1e1e1e;
+  --btnHover: #007bff;
+  --switchHover: #444950;
   --shadow: rgba(255, 255, 255, 0.2);
 }

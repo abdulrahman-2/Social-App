@@ -26,21 +26,25 @@ export default function ThemeSwitch() {
 
   if (resolvedTheme === "dark") {
     return (
-      <FiSun
-        className="cursor-pointer"
-        size={25}
-        onClick={() => setTheme("light")}
-      />
+      <div className="w-[40px] h-[40px] rounded-full grid place-content-center hover:bg-switchHover duration-150">
+        <FiSun
+          className="cursor-pointer"
+          size={27}
+          onClick={() => setTheme("light")}
+        />
+      </div>
     );
   }
 
   if (resolvedTheme === "light") {
     return (
-      <FiMoon
-        className="cursor-pointer"
-        size={25}
-        onClick={() => setTheme("dark")}
-      />
+      <div className="w-[40px] h-[40px] rounded-full grid place-content-center hover:bg-switchHover duration-150">
+        <FiMoon
+          className="cursor-pointer"
+          size={27}
+          onClick={() => setTheme("dark")}
+        />
+      </div>
     );
   }
 }
