@@ -9,7 +9,7 @@ const ProfilePage = ({ user, posts }: { user: User; posts: Post[] }) => {
   return (
     <div>
       <h1 className="text-2xl font-bold mt-10 mb-5">Profile</h1>
-      <div className="flex flex-col sm:flex-row gap-7 items-center justify-between shadow-sm shadow-shadow bg-card rounded-lg px-2 py-5 md:px-5">
+      <div className="flex flex-col sm:flex-row gap-7 sm:items-center items-start justify-between shadow-sm shadow-shadow bg-card rounded-lg p-5">
         <Image
           src={
             (isValidImageUrl(user?.profile_image) && user?.profile_image) ||
@@ -18,7 +18,7 @@ const ProfilePage = ({ user, posts }: { user: User; posts: Post[] }) => {
           alt={user?.name}
           width={200}
           height={200}
-          className="w-32 h-32 md:w-40 md:h-40 rounded-full border-[3px] border-border"
+          className="w-32 h-32 mx-auto md:w-40 md:h-40 rounded-full border-[3px] border-border"
         />
         <div className="flex flex-col gap-7">
           <h2 className="text-lg md:text-xl font-semibold">{user?.email}</h2>
