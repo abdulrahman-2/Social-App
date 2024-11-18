@@ -55,8 +55,7 @@ const PostPage = ({ post }: { post: Post }) => {
       await createComment(id, formData, token);
       toast.success("Comment Created successfully.");
     } catch (error) {
-      console.log(error);
-      toast.error("Failed to comment. Please try again.");
+      toast.error(`${error}`);
     }
   };
 

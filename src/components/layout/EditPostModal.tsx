@@ -66,8 +66,7 @@ export function EditPostModal({
       toast.success(`Post edited successfully`);
       onCloseModal();
     } catch (error) {
-      console.error(error);
-      toast.error("Failed to edit post");
+      toast.error(`${error}`);
     } finally {
       setLoading(false);
     }

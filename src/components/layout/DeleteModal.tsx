@@ -24,8 +24,7 @@ export function DeleteModal({
       await deletePost(id, token);
       toast.success("Post deleted successfully.");
     } catch (error) {
-      console.log(error);
-      toast.error("Failed to delete post. Please try again.");
+      toast.error(`${error}`);
     }
   };
 

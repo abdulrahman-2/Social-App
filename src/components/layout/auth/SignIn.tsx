@@ -42,9 +42,8 @@ const SignIn = () => {
       setLoading(false);
       onCloseModal();
     } catch (error) {
-      console.error(error);
       setLoading(false);
-      toast.error("Failed to login. Please check your credentials.");
+      toast.error(`${error}`);
     }
   };
 

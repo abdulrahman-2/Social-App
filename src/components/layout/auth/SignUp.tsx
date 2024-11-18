@@ -10,12 +10,13 @@ import {
   Spinner,
   TextInput,
 } from "flowbite-react";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import toast from "react-hot-toast";
 
 const SignUp = () => {
   const [openModal, setOpenModal] = useState(false);
   const [loading, setLoading] = useState(false);
+  const imageRef = useRef<HTMLInputElement>(null);
 
   function onCloseModal() {
     setOpenModal(false);
@@ -26,14 +27,16 @@ const SignUp = () => {
     setLoading(true);
 
     const formData = new FormData(e.currentTarget);
+    if (imageRef.current?.files?.[0]) {
+      formData.append("image", imageRef.current.files[0]);
+    }
 
     try {
       await Register(formData);
       toast.success(`Registered successfully`);
       onCloseModal();
     } catch (error) {
-      console.error(error);
-      toast.error("Failed to register. Please check your details.");
+      toast.error(`${error}`);
     } finally {
       setLoading(false);
     }
@@ -102,7 +105,7 @@ const SignUp = () => {
                 <div className="mb-2 block">
                   <Label htmlFor="file-upload" value="Upload Image" />
                 </div>
-                <FileInput id="file-upload" name="image" />
+                <FileInput id="file-upload" ref={imageRef} />
               </div>
               <div className="flex justify-between">
                 <div className="flex items-center gap-2">

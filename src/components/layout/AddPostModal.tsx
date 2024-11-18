@@ -39,7 +39,7 @@ export function AddPostModal() {
       onCloseModal();
     } catch (error) {
       console.error(error);
-      toast.error("Failed to Create Post");
+      toast.error(`${error}`);
     } finally {
       setLoading(false);
     }

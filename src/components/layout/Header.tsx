@@ -65,9 +65,9 @@ const Header = () => {
                     {user?.email || "No email available"}
                   </span>
                 </Dropdown.Header>
-                <Dropdown.Item>
-                  <Link href={`/profile/${user?.id}`}>Profile</Link>
-                </Dropdown.Item>
+                <Link href={`/profile/${user?.id}`}>
+                  <Dropdown.Item>Profile</Dropdown.Item>
+                </Link>
                 <Dropdown.Item onClick={handleLogout}>Sign out</Dropdown.Item>
               </Dropdown>
             </div>
