@@ -29,60 +29,56 @@ const Header = () => {
   };
 
   return (
-    <div className="sticky top-0 z-10 bg-background shadow-md shadow-shadow">
-      <div className="container max-w-screen-lg h-[70px] p-3 flex items-center justify-between">
-        <div className="flex items-center gap-3 md:gap-6">
-          <Link href="/" className="text-2xl font-bold">
-            Nestly
-          </Link>
-        </div>
+    <div className="sticky top-0 z-10 bg-background shadow-lg rounded-b-lg shadow-shadow h-[70px] p-3 flex items-center justify-between">
+      <div className="flex items-center gap-3 md:gap-6">
+        <Link href="/" className="text-2xl font-bold">
+          Nestly
+        </Link>
+      </div>
 
-        {/* User Session */}
-        <div className="flex items-center gap-2 md:gap-3">
-          {isAuthenticated ? (
-            <>
-              <div className="w-[35px] h-[35px] rounded-full overflow-hidden border-[3px] border-border grid place-content-center">
-                <Dropdown
-                  label={
-                    <Image
-                      alt="User settings"
-                      src={
-                        isValidImageUrl(user?.profile_image)
-                          ? (user?.profile_image as string)
-                          : noAvatar
-                      }
-                      width={35}
-                      height={35}
-                      priority
-                      className="w-[35px] h-[35px] rounded-full"
-                    />
-                  }
-                  arrowIcon={false}
-                  inline
-                >
-                  <Dropdown.Header>
-                    <span className="block text-sm">
-                      {user?.name || "Guest"}
-                    </span>
-                    <span className="block truncate text-sm font-medium">
-                      {user?.email || "No email available"}
-                    </span>
-                  </Dropdown.Header>
-                  <Dropdown.Item>Profile</Dropdown.Item>
-                  <Dropdown.Item onClick={handleLogout}>Sign out</Dropdown.Item>
-                </Dropdown>
-              </div>
-            </>
-          ) : (
-            <div className="flex items-center gap-2 md:gap-3">
-              <SignIn />
-              <SignUp />
+      {/* User Session */}
+      <div className="flex items-center gap-2 md:gap-3">
+        {isAuthenticated ? (
+          <>
+            <div className="w-[35px] h-[35px] rounded-full overflow-hidden border-[3px] border-border grid place-content-center">
+              <Dropdown
+                label={
+                  <Image
+                    alt="User settings"
+                    src={
+                      isValidImageUrl(user?.profile_image)
+                        ? (user?.profile_image as string)
+                        : noAvatar
+                    }
+                    width={35}
+                    height={35}
+                    priority
+                    className="w-[35px] h-[35px] rounded-full"
+                  />
+                }
+                arrowIcon={false}
+                inline
+              >
+                <Dropdown.Header>
+                  <span className="block text-sm">{user?.name || "Guest"}</span>
+                  <span className="block truncate text-sm font-medium">
+                    {user?.email || "No email available"}
+                  </span>
+                </Dropdown.Header>
+                <Dropdown.Item>Profile</Dropdown.Item>
+                <Dropdown.Item onClick={handleLogout}>Sign out</Dropdown.Item>
+              </Dropdown>
             </div>
-          )}
+          </>
+        ) : (
+          <div className="flex items-center gap-2 md:gap-3">
+            <SignIn />
+            <SignUp />
+          </div>
+        )}
 
-          {/* Theme Switch */}
-          <ThemeSwitch />
-        </div>
+        {/* Theme Switch */}
+        <ThemeSwitch />
       </div>
     </div>
   );

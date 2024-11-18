@@ -25,9 +25,11 @@ export default function RootLayout({
     <html lang="en">
       <body className={`bg-background ${poppins.className}`}>
         <Providers>
-          <Header />
-          <div className="container max-w-screen-lg">{children}</div>
-          <Notifications />
+          <div className="container max-w-screen-lg">
+            <Header />
+            {children}
+            <Notifications />
+          </div>
         </Providers>
       </body>
     </html>

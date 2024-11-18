@@ -18,7 +18,7 @@ const CommentRenderer = ({ comments }: { comments: Comment[] }) => (
               alt={comment.author.name}
               width={35}
               height={35}
-              className="rounded-full"
+              className="rounded-full border-[3px] border-border"
             />
             <div className="flex flex-col gap-1">
               <h3 className="text-primary text-lg font-semibold">

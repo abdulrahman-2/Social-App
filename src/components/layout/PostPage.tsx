@@ -87,7 +87,7 @@ const PostPage = ({ post }: { post: Post }) => {
               alt={author.name || "Author"}
               width={32}
               height={32}
-              className="w-[32px] h-[32px] rounded-full"
+              className="w-[32px] h-[32px] rounded-full border-[3px] border-border"
             />
             <h4 className="text-xl font-semibold">{author.name}</h4>
           </div>

@@ -53,7 +53,10 @@ const PostCard = ({
       />
       <div className="rounded-lg shadow shadow-shadow border border-border bg-card overflow-hidden cursor-pointer">
         <div className="px-3 pt-3 flex items-center justify-between">
-          <div className="flex items-center gap-3">
+          <Link
+            href={`/profile/${author.id}`}
+            className="flex items-center gap-3"
+          >
             <Image
               src={
                 (isValidImageUrl(author?.profile_image) &&
@@ -66,7 +69,7 @@ const PostCard = ({
               className="w-[32px] h-[32px] rounded-full border-[3px] border-border"
             />
             <h4 className="text-xl font-semibold">{author.name}</h4>
-          </div>
+          </Link>
           {user?.id === author.id && (
             <Dropdown
               label={<BsThreeDots size={30} />}

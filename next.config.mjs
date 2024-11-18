@@ -7,6 +7,11 @@ const nextConfig = {
         hostname: "tarmeezacademy.com",
         pathname: "/**",
       },
+      {
+        protocol: "https",
+        hostname: "tarmeezacademy.com",
+        pathname: "/**",
+      },
     ],
   },
 };

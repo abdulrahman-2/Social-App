@@ -1,7 +1,7 @@
 "use server";
 
 import { AxiosError } from "axios";
-import { Post, UserData } from "@/types/types";
+import { Post, User, UserData } from "@/types/types";
 import { api } from "./api";
 import { revalidatePath } from "next/cache";
 
@@ -38,6 +38,42 @@ export const getSinglePost = async (id: number): Promise<Post> => {
       console.error("Unknown error:", error);
     }
     throw new Error("Failed to fetch post. Please try again later.");
+  }
+};
+
+// Fetch single User
+export const getSingleUser = async (userId: number): Promise<User> => {
+  try {
+    const response = await api.get(`/users/${userId}`);
+    return response.data.data;
+  } catch (error: unknown) {
+    if (error instanceof AxiosError) {
+      console.error(
+        "Error fetching user:",
+        error.response?.data || error.message
+      );
+    } else {
+      console.error("Unknown error:", error);
+    }
+    throw new Error("Failed to fetch user. Please try again later.");
+  }
+};
+
+// user posts
+export const getUserPosts = async (userId: number): Promise<Post[]> => {
+  try {
+    const response = await api.get(`/users/${userId}/posts`);
+    return response.data.data;
+  } catch (error: unknown) {
+    if (error instanceof AxiosError) {
+      console.error(
+        "Error fetching user posts:",
+        error.response?.data || error.message
+      );
+    } else {
+      console.error("Unknown error:", error);
+    }
+    throw new Error("Failed to fetch user posts. Please try again later.");
   }
 };
 
