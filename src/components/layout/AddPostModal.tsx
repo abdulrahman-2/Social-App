@@ -37,6 +37,8 @@ export function AddPostModal() {
         formData.append("image", imageFile);
       } else {
         toast.error("Image size should be less than 700KB.");
+        setLoading(false);
+        return;
       }
     }
 

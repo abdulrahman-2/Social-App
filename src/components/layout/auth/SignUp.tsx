@@ -27,7 +27,6 @@ const SignUp = () => {
     setLoading(true);
 
     const formData = new FormData(e.currentTarget);
-
     if (imageRef.current?.files?.[0]) {
       const imageFile = imageRef.current.files[0];
       const maxSizeInBytes = 700 * 1024;
@@ -36,6 +35,8 @@ const SignUp = () => {
         formData.append("image", imageFile);
       } else {
         toast.error("Image size should be less than 700KB.");
+        setLoading(false);
+        return;
       }
     }
 

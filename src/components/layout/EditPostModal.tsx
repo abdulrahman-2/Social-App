@@ -59,7 +59,16 @@ export function EditPostModal({
     formData.append("title", title);
     formData.append("body", body);
     if (imageRef.current?.files?.[0]) {
-      formData.append("image", imageRef.current.files[0]);
+      const imageFile = imageRef.current.files[0];
+      const maxSizeInBytes = 700 * 1024;
+
+      if (imageFile.size <= maxSizeInBytes) {
+        formData.append("image", imageFile);
+      } else {
+        toast.error("Image size should be less than 700KB.");
+        setLoading(false);
+        return;
+      }
     }
 
     try {
