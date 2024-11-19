@@ -13,11 +13,7 @@ export const getPosts = async (page: number): Promise<Post[]> => {
   } catch (error: unknown) {
     console.error("Error fetching posts:", error);
     if (error instanceof AxiosError && error.response) {
-      throw new Error(
-        error.response.data.message ||
-          error.response.data.errors ||
-          "Failed to fetch posts."
-      );
+      throw new Error(error.response.data.message);
     }
     throw new Error("Failed to fetch posts. Please try again.");
   }
@@ -31,11 +27,7 @@ export const getSinglePost = async (id: number): Promise<Post> => {
   } catch (error: unknown) {
     console.error("Error fetching post:", error);
     if (error instanceof AxiosError && error.response) {
-      throw new Error(
-        error.response.data.message ||
-          error.response.data.errors ||
-          "Failed to fetch post."
-      );
+      throw new Error(error.response.data.message);
     }
     throw new Error("Failed to fetch post. Please try again later.");
   }
@@ -49,11 +41,7 @@ export const getSingleUser = async (userId: number): Promise<User> => {
   } catch (error: unknown) {
     console.error("Error fetching user:", error);
     if (error instanceof AxiosError && error.response) {
-      throw new Error(
-        error.response.data.message ||
-          error.response.data.errors ||
-          "Failed to fetch user."
-      );
+      throw new Error(error.response.data.message);
     }
     throw new Error("Failed to fetch user. Please try again later.");
   }
@@ -67,11 +55,7 @@ export const getUserPosts = async (userId: number): Promise<Post[]> => {
   } catch (error: unknown) {
     console.error("Error fetching user posts:", error);
     if (error instanceof AxiosError && error.response) {
-      throw new Error(
-        error.response.data.message ||
-          error.response.data.errors ||
-          "Failed to fetch user posts."
-      );
+      throw new Error(error.response.data.message);
     }
     throw new Error("Failed to fetch user posts. Please try again later.");
   }
@@ -84,13 +68,8 @@ export const login = async (formData: FormData): Promise<UserData> => {
     revalidatePath("/");
     return response.data;
   } catch (error: unknown) {
-    console.error("Error during login:", error);
     if (error instanceof AxiosError && error.response) {
-      throw new Error(
-        error.response.data.message ||
-          error.response.data.errors ||
-          "Failed to login. Please check your credentials."
-      );
+      throw new Error(error.response.data.message);
     }
     throw new Error("Failed to login. Please check your credentials.");
   }
@@ -101,13 +80,9 @@ export const Register = async (formData: FormData): Promise<void> => {
   try {
     await api.post("/register", formData);
   } catch (error: unknown) {
-    console.error("Error during registration:", error);
+    console.error("Error registering user:", error);
     if (error instanceof AxiosError && error.response) {
-      throw new Error(
-        error.response.data.message ||
-          error.response.data.errors ||
-          "Failed to register."
-      );
+      throw new Error(error.response.data.message);
     }
     throw new Error("Failed to register. Please try again.");
   }
@@ -126,13 +101,8 @@ export const createPost = async (
     });
     revalidatePath("/");
   } catch (error: unknown) {
-    console.error("Error during post creation:", error);
     if (error instanceof AxiosError && error.response) {
-      throw new Error(
-        error.response.data.message ||
-          error.response.data.errors ||
-          "Failed to create post."
-      );
+      throw new Error(error.response.data.message);
     }
     throw new Error("Failed to create post. Please try again.");
   }
@@ -153,13 +123,8 @@ export const editPost = async (
     });
     revalidatePath("/");
   } catch (error: unknown) {
-    console.error("Error during post update:", error);
     if (error instanceof AxiosError && error.response) {
-      throw new Error(
-        error.response.data.message ||
-          error.response.data.errors ||
-          "Failed to update post."
-      );
+      throw new Error(error.response.data.message);
     }
     throw new Error("Failed to update post. Please try again.");
   }
@@ -175,13 +140,8 @@ export const deletePost = async (postId: number, token: string) => {
     });
     revalidatePath("/");
   } catch (error: unknown) {
-    console.error("Error during post deletion:", error);
     if (error instanceof AxiosError && error.response) {
-      throw new Error(
-        error.response.data.message ||
-          error.response.data.errors ||
-          "Failed to delete post."
-      );
+      throw new Error(error.response.data.message);
     }
     throw new Error("Failed to delete post. Please try again.");
   }
@@ -201,13 +161,8 @@ export const createComment = async (
     });
     revalidatePath(`/posts/${postId}`);
   } catch (error: unknown) {
-    console.error("Error during comment creation:", error);
     if (error instanceof AxiosError && error.response) {
-      throw new Error(
-        error.response.data.message ||
-          error.response.data.errors ||
-          "Failed to create comment."
-      );
+      throw new Error(error.response.data.message);
     }
     throw new Error("Failed to create comment. Please try again.");
   }

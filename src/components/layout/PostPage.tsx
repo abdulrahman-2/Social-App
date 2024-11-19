@@ -49,13 +49,17 @@ const PostPage = ({ post }: { post: Post }) => {
     e.preventDefault();
     setLoading(true);
 
-    const formData = new FormData(e.currentTarget);
+    const form = e.currentTarget;
+    const formData = new FormData(form);
 
     try {
       await createComment(id, formData, token);
       toast.success("Comment Created successfully.");
+      form.reset();
     } catch (error) {
       toast.error(`${error}`);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -157,7 +161,7 @@ const PostPage = ({ post }: { post: Post }) => {
                   <>
                     <Spinner
                       aria-label="Extra large spinner example"
-                      size="md"
+                      size="sm"
                       color="white"
                     />
                   </>

@@ -20,7 +20,7 @@ export function EditPostModal({
   const [post, setPost] = useState<Post>();
   const [title, setTitle] = useState("");
   const [body, setBody] = useState("");
-  const emailInputRef = useRef<HTMLInputElement>(null);
+  const titleInputRef = useRef<HTMLInputElement>(null);
   const imageRef = useRef<HTMLInputElement>(null);
   const { token } = useSelector(
     (state: { auth: { token: string } }) => state.auth
@@ -56,7 +56,8 @@ export function EditPostModal({
     setLoading(true);
 
     const formData = new FormData();
-    formData.append("body", title);
+    formData.append("title", title);
+    formData.append("body", body);
     if (imageRef.current?.files?.[0]) {
       formData.append("image", imageRef.current.files[0]);
     }
@@ -73,7 +74,13 @@ export function EditPostModal({
   };
 
   return (
-    <Modal show={openModal} size="md" popup onClose={onCloseModal}>
+    <Modal
+      show={openModal}
+      size="md"
+      popup
+      initialFocus={titleInputRef}
+      onClose={onCloseModal}
+    >
       <Modal.Header />
       <Modal.Body>
         <div className="space-y-6">
@@ -90,7 +97,7 @@ export function EditPostModal({
                 name="title"
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
-                ref={emailInputRef}
+                ref={titleInputRef}
                 placeholder="Title"
               />
             </div>

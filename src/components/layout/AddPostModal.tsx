@@ -9,7 +9,7 @@ import { useSelector } from "react-redux";
 export function AddPostModal() {
   const [openModal, setOpenModal] = useState(false);
   const [loading, setLoading] = useState(false);
-  const emailInputRef = useRef<HTMLInputElement>(null);
+  const titleInputRef = useRef<HTMLInputElement>(null);
   const imageRef = useRef<HTMLInputElement>(null);
 
   const onCloseModal = () => {
@@ -30,7 +30,14 @@ export function AddPostModal() {
 
     const formData = new FormData(e.currentTarget);
     if (imageRef.current?.files?.[0]) {
-      formData.append("image", imageRef.current.files[0]);
+      const imageFile = imageRef.current.files[0];
+      const maxSizeInBytes = 700 * 1024;
+
+      if (imageFile.size <= maxSizeInBytes) {
+        formData.append("image", imageFile);
+      } else {
+        toast.error("Image size should be less than 700KB.");
+      }
     }
 
     try {
@@ -53,7 +60,7 @@ export function AddPostModal() {
         size="md"
         popup
         onClose={() => setOpenModal(false)}
-        initialFocus={emailInputRef}
+        initialFocus={titleInputRef}
       >
         <Modal.Header />
         <Modal.Body>
@@ -69,7 +76,7 @@ export function AddPostModal() {
                 <TextInput
                   id="title"
                   name="title"
-                  ref={emailInputRef}
+                  ref={titleInputRef}
                   placeholder="Title"
                 />
               </div>
@@ -77,13 +84,7 @@ export function AddPostModal() {
                 <div className="mb-2 block">
                   <Label htmlFor="body" value="Body" />
                 </div>
-                <TextInput
-                  id="body"
-                  name="body"
-                  ref={emailInputRef}
-                  placeholder="Body"
-                  required
-                />
+                <TextInput id="body" name="body" placeholder="Body" required />
               </div>
               <div>
                 <div className="mb-2 block">
