@@ -1,7 +1,7 @@
 import { AddPostModal } from "@/components/layout/AddPostModal";
 import LoadMore from "@/components/layout/LoadMore";
 import PostCard from "@/components/layout/PostCard";
-import { getPosts } from "@/lib/actions";
+import { getPosts } from "@/lib/api";
 import { Post } from "@/types/types";
 import React from "react";
 

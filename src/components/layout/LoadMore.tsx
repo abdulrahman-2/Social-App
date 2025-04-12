@@ -1,11 +1,11 @@
 "use client";
 
-import { getPosts } from "@/lib/actions";
 import { Post } from "@/types/types";
 import { Spinner } from "flowbite-react";
 import { useEffect, useState } from "react";
 import { useInView } from "react-intersection-observer";
 import PostCard from "./PostCard";
+import { getPosts } from "@/lib/api";
 
 let page: number = 2;
 

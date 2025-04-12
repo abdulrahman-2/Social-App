@@ -1,5 +1,5 @@
 import ProfilePage from "@/components/layout/ProfilePage";
-import { getSingleUser, getUserPosts } from "@/lib/actions";
+import { getSingleUser, getUserPosts } from "@/lib/api";
 import React from "react";
 
 const Profile = async ({ params }: { params: { id: number } }) => {

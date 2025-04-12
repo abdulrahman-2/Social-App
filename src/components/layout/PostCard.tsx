@@ -92,16 +92,14 @@ const PostCard = ({
         <hr className="text-secondary mt-3" />
         <Link href={`/posts/${id}`}>
           {isValidImageUrl(image) && (
-            <div className="relative w-full mt-3 h-[300px] md:h-[450px]">
               <Image
                 src={image}
                 alt="post image"
-                fill
-                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                width={500}
+                height={500}
                 loading="lazy"
-                className="absolute w-full h-full object-contain"
+                className="w-full h-full object-contain"
               />
-            </div>
           )}
           <span className="px-1 text-xs text-secondary">{created_at}</span>
           <h3 className="px-3 text-2xl font-semibold my-2">{title}</h3>

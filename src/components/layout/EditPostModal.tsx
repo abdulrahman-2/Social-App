@@ -1,6 +1,7 @@
 "use client";
 
-import { editPost, getSinglePost } from "@/lib/actions";
+import { editPost } from "@/lib/actions";
+import { getSinglePost } from "@/lib/api";
 import { Post } from "@/types/types";
 import { Button, FileInput, Label, Modal, TextInput } from "flowbite-react";
 import { useEffect, useRef, useState } from "react";

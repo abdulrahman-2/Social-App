@@ -119,16 +119,14 @@ const PostPage = ({ post }: { post: Post }) => {
         </div>
         <hr className="text-secondary my-3" />
         {isValidImageUrl(image) && (
-          <div className="relative w-full mt-3 h-[300px] md:h-[450px]">
-            <Image
-              src={image}
-              alt="post image"
-              fill
-              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-              loading="lazy"
-              className="absolute w-full h-full object-contain"
-            />
-          </div>
+          <Image
+            src={image}
+            alt="post image"
+            width={500}
+            height={500}
+            loading="lazy"
+            className="w-full h-full object-contain"
+          />
         )}
         <div>
           <span className="px-1 text-xs text-secondary">{created_at}</span>

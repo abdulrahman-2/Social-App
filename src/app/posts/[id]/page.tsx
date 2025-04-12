@@ -1,5 +1,5 @@
 import PostPage from "@/components/layout/PostPage";
-import { getSinglePost } from "@/lib/actions";
+import { getSinglePost } from "@/lib/api";
 import React from "react";
 
 const Post = async ({ params }: { params: { id: number } }) => {
